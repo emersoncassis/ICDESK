@@ -1,17 +1,58 @@
 <p align="center">
-  <img src="res/logo-header.svg" alt="RustDesk - Your remote desktop"><br>
-  <a href="#raw-steps-to-build">Build</a> •
-  <a href="#how-to-build-with-docker">Docker</a> •
-  <a href="#file-structure">Structure</a> •
-  <a href="#screenshots">Screenshots</a><br>
-  [<a href="docs/README-UA.md">Українська</a>] | [<a href="docs/README-CS.md">česky</a>] | [<a href="docs/README-ZH.md">中文</a>] | [<a href="docs/README-HU.md">Magyar</a>] | [<a href="docs/README-ES.md">Español</a>] | [<a href="docs/README-FA.md">فارسی</a>] | [<a href="docs/README-FR.md">Français</a>] | [<a href="docs/README-DE.md">Deutsch</a>] | [<a href="docs/README-PL.md">Polski</a>] | [<a href="docs/README-ID.md">Indonesian</a>] | [<a href="docs/README-FI.md">Suomi</a>] | [<a href="docs/README-ML.md">മലയാളം</a>] | [<a href="docs/README-JP.md">日本語</a>] | [<a href="docs/README-NL.md">Nederlands</a>] | [<a href="docs/README-IT.md">Italiano</a>] | [<a href="docs/README-RU.md">Русский</a>] | [<a href="docs/README-PTBR.md">Português (Brasil)</a>] | [<a href="docs/README-EO.md">Esperanto</a>] | [<a href="docs/README-KR.md">한국어</a>] | [<a href="docs/README-AR.md">العربي</a>] | [<a href="docs/README-VN.md">Tiếng Việt</a>] | [<a href="docs/README-DA.md">Dansk</a>] | [<a href="docs/README-GR.md">Ελληνικά</a>] | [<a href="docs/README-TR.md">Türkçe</a>] | [<a href="docs/README-NO.md">Norsk</a>] | [<a href="docs/README-RO.md">Română</a>]<br>
-  <b>We need your help to translate this README, <a href="https://github.com/rustdesk/rustdesk/tree/master/src/lang">RustDesk UI</a> and <a href="https://github.com/rustdesk/doc.rustdesk.com">RustDesk Doc</a> to your native language</b>
+  <img src="res/logo-header.svg" alt="ICDESK - Remote Access"><br>
+  <a href="#identidade-visual">Identidade visual</a> •
+  <a href="#como-funciona">Como funciona</a> •
+  <a href="#como-compilar">Compilar</a> •
+  <a href="#sobre-o-upstream-rustdesk">Upstream</a>
 </p>
+
+# ICDESK
+
+Software de acesso e controle remoto do **IC TEAM**. Permite usar, ver ou consertar um computador ou celular à distância pela internet.
+
+ICDESK é um fork do [RustDesk](https://github.com/rustdesk/rustdesk) com identidade visual própria, inspirada no emblema do IC TEAM.
+
+## Como funciona
+
+- Cada dispositivo recebe um número de identificação único (ID).
+- Para acessar outra máquina, digite o ID no programa.
+- O dono do outro aparelho precisa aceitar a conexão para liberar o acesso.
+- Funciona em Windows, macOS, Linux, Android e iOS.
+
+## Identidade visual
+
+Preto como base, dourado como destaque e azul só como acento de conexão. As cores de status são separadas para o dourado nunca ser lido como alerta.
+
+| Cor | Hex | Uso | Token CSS |
+|---|---|---|---|
+| Rich Black | `#0D0D0D` | Fundo, capa, textos escuros | `--cx-richblack` |
+| IC Gold | `#C5A059` | Títulos, filetes, botões, detalhes | `--cx-gold` |
+| IC Gold claro | `#E8CE94` | Hover, links, realce do gradiente | `--cx-goldlight` |
+| Tech Blue | `#00F0FF` | Acento pontual: sinal de conexão, gráficos | `--cx-techblue` |
+| Texto | `#F2F2F2` | Texto sobre fundo escuro | `--cx-text` |
+| Status online | `#22C55E` | Online, sucesso | `--cx-ok` |
+| Status alerta | `#EAB308` | Backup atrasado, CPU/temperatura alta | `--cx-warn` |
+| Status offline | `#EF4444` | Offline, erro | `--cx-offline` |
+
+Gradiente dourado do logo: `#EBD7A6` → `#C5A059` → `#8A6A32`.
+
+- Fonte da verdade das cores: [`brand/tokens.css`](brand/tokens.css). O app Flutter espelha esses valores em [`flutter/lib/brand.dart`](flutter/lib/brand.dart) (`IcBrand`); mantenha os dois iguais.
+- Logo, ícones e scripts de geração: [`res/icdesk-brand/`](res/icdesk-brand/README.md). Para regenerar todos os ícones: `python3 res/icdesk-brand/export.py`.
+- Tipografia do logo: Barlow Semi Condensed (Google Fonts).
+
+## Como compilar
+
+O processo é o mesmo do RustDesk. Veja [Raw Steps to build](#raw-steps-to-build), [Docker](#how-to-build-with-docker) e o [CI do Flutter](https://github.com/rustdesk/rustdesk/blob/master/.github/workflows/flutter-build.yml).
+
+---
+
+## Sobre o upstream (RustDesk)
+
+O texto abaixo é do README original do RustDesk, mantido por atribuição e porque as instruções de build continuam valendo. O projeto é distribuído sob a licença AGPL-3.0 (ver [LICENCE](LICENCE)).
 
 > [!Caution]
 > **Misuse Disclaimer:** <br>
 > The developers of RustDesk do not condone or support any unethical or illegal use of this software. Misuse, such as unauthorized access, control or invasion of privacy, is strictly against our guidelines. The authors are not responsible for any misuse of the application.
-
 
 Chat with us: [Discord](https://discord.gg/nDceKgxnkV) | [Twitter](https://twitter.com/rustdesk) | [Reddit](https://www.reddit.com/r/rustdesk) | [YouTube](https://www.youtube.com/@rustdesk)
 
