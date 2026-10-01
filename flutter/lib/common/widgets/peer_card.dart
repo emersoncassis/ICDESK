@@ -1471,7 +1471,7 @@ Widget getOnline(double rightPadding, bool online) {
       child: Padding(
           padding: EdgeInsets.fromLTRB(0, 4, rightPadding, 4),
           child: CircleAvatar(
-              radius: 3, backgroundColor: online ? Colors.green : kColorWarn)));
+              radius: 3, backgroundColor: online ? IcBrand.ok : IcBrand.offline)));
 }
 
 Widget build_more(BuildContext context, {bool invert = false}) {

@@ -1,0 +1,42 @@
+/*
+ * ICDESK — design tokens (fonte da verdade da marca)
+ *
+ * Papéis fixos:
+ *   preto  = base · dourado = destaque · azul = só acento de conexão
+ * As cores de status são separadas para o dourado nunca ser lido como alerta.
+ *
+ * O frontend importa daqui; não repita hex no código.
+ * O app Flutter espelha estes valores em flutter/lib/brand.dart (IcBrand).
+ */
+
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;700&display=swap");
+
+:root {
+  /* Marca */
+  --cx-richblack: #0D0D0D;  /* 13,13,13     fundo, capa, textos escuros */
+  --cx-gold:      #C5A059;  /* 197,160,89   títulos, filetes, botões, detalhes */
+  --cx-goldlight: #E8CE94;  /* 232,206,148  hover, links, realce do gradiente */
+  --cx-techblue:  #00F0FF;  /* 0,240,255    acento pontual: sinal de conexão, gráficos */
+  --cx-text:      #F2F2F2;  /* 242,242,242  texto sobre fundo escuro */
+
+  /* Status (nunca usar dourado para isso) */
+  --cx-ok:      #22C55E;    /* online, sucesso */
+  --cx-warn:    #EAB308;    /* backup atrasado, CPU/temperatura alta */
+  --cx-offline: #EF4444;    /* offline, erro */
+
+  /* Gradiente dourado do logo */
+  --cx-gold-grad-1: #EBD7A6;
+  --cx-gold-grad-2: #C5A059;
+  --cx-gold-grad-3: #8A6A32;
+  --cx-gold-gradient: linear-gradient(135deg, var(--cx-gold-grad-1), var(--cx-gold-grad-2), var(--cx-gold-grad-3));
+
+  /* Derivados (superfícies da UI escura) */
+  --cx-surface:   #161616;
+  --cx-surface-2: #1F1F1F;
+  --cx-hover:     #262626;
+  --cx-gold-deep: #8A6A32;  /* dourado para texto sobre fundo claro (contraste ≥ 4.5:1) */
+  --cx-on-gold:   #0D0D0D;  /* texto sobre botão dourado */
+
+  /* Tipografia (Google Fonts) */
+  --cx-font-display: "Barlow Semi Condensed", "Arial Narrow", sans-serif;
+}
