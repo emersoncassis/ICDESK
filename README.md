@@ -1,5 +1,6 @@
 <p align="center">
   <img src="res/logo-header.svg" alt="ICDESK - Remote Access"><br>
+  <a href="#idioma">Idioma</a> •
   <a href="#identidade-visual">Identidade visual</a> •
   <a href="#como-funciona">Como funciona</a> •
   <a href="#como-compilar">Compilar</a> •
@@ -18,6 +19,14 @@ ICDESK é um fork do [RustDesk](https://github.com/rustdesk/rustdesk) com identi
 - Para acessar outra máquina, digite o ID no programa.
 - O dono do outro aparelho precisa aceitar a conexão para liberar o acesso.
 - Funciona em Windows, macOS, Linux, Android e iOS.
+
+## Idioma
+
+A interface abre em **português do Brasil** por padrão. Para trocar, vá em Configurações > Idioma; a escolha fica salva.
+
+- Traduções: [`src/lang/pt_BR.rs`](src/lang/pt_BR.rs) (completo, 780 textos). Nele, "RustDesk" aparece como "ICDESK".
+- O padrão é definido em `translate_locale`, em [`src/lang.rs`](src/lang.rs).
+- Português de Portugal continua disponível em `src/lang/pt_PT.rs`.
 
 ## Identidade visual
 
