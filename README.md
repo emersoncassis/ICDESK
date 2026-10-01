@@ -46,8 +46,9 @@ Preto como base, dourado como destaque e azul só como acento de conexão. As co
 Gradiente dourado do logo: `#EBD7A6` → `#C5A059` → `#8A6A32`.
 
 - Fonte da verdade das cores: [`brand/tokens.css`](brand/tokens.css). O app Flutter espelha esses valores em [`flutter/lib/brand.dart`](flutter/lib/brand.dart) (`IcBrand`); mantenha os dois iguais.
-- Logo, ícones e scripts de geração: [`res/icdesk-brand/`](res/icdesk-brand/README.md). Para regenerar todos os ícones: `python3 res/icdesk-brand/export.py`.
+- Logo, ícones e scripts de geração: [`res/icdesk-brand/`](res/icdesk-brand/README.md). Para regenerar logo e ícones (precisa de Python, `cairosvg`, `fonttools`, `pillow` e ImageMagick): `cd res/icdesk-brand && python3 gen.py && python3 export.py`. Os SVGs gerados ficam em `res/icdesk-brand/svg/`, que o `.gitignore` do RustDesk não versiona (`*.svg`); o `gen.py` os recria.
 - Tipografia do logo: Barlow Semi Condensed (Google Fonts).
+- O banner do topo (`res/logo-header.svg`) tem fundo preto próprio para ficar legível nos temas claro e escuro do GitHub.
 
 ## Como compilar
 

@@ -19,7 +19,7 @@ Cores: ouro `#C9A85F` / `#EAD39A` / `#A8853F`, preto `#0D0D0D`, prata `#7D7D7D`/
 
 ```bash
 pip install cairosvg fonttools pillow   # + ImageMagick (convert)
-python3 gen.py       # recria svg/
+python3 gen.py       # recria svg/ (essa pasta não é versionada: o .gitignore ignora *.svg)
 python3 export.py    # grava todos os ícones no repositório
 ```
 
