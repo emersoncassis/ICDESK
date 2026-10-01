@@ -31,25 +31,7 @@ A interface abre em **português do Brasil** por padrão. Para trocar, vá em Co
 
 ## Identidade visual
 
-Preto como base, dourado como destaque e azul só como acento de conexão. As cores de status são separadas para o dourado nunca ser lido como alerta.
-
-| Cor | Hex | Uso | Token CSS |
-|---|---|---|---|
-| Rich Black | `#0D0D0D` | Fundo, capa, textos escuros | `--cx-richblack` |
-| IC Gold | `#C5A059` | Títulos, filetes, botões, detalhes | `--cx-gold` |
-| IC Gold claro | `#E8CE94` | Hover, links, realce do gradiente | `--cx-goldlight` |
-| Tech Blue | `#00F0FF` | Acento pontual: sinal de conexão, gráficos | `--cx-techblue` |
-| Texto | `#F2F2F2` | Texto sobre fundo escuro | `--cx-text` |
-| Status online | `#22C55E` | Online, sucesso | `--cx-ok` |
-| Status alerta | `#EAB308` | Backup atrasado, CPU/temperatura alta | `--cx-warn` |
-| Status offline | `#EF4444` | Offline, erro | `--cx-offline` |
-
-Gradiente dourado do logo: `#EBD7A6` → `#C5A059` → `#8A6A32`.
-
-- Fonte da verdade das cores: [`brand/tokens.css`](brand/tokens.css). O app Flutter espelha esses valores em [`flutter/lib/brand.dart`](flutter/lib/brand.dart) (`IcBrand`); mantenha os dois iguais.
-- Logo, ícones e scripts de geração: [`res/icdesk-brand/`](res/icdesk-brand/README.md). Para regenerar (precisa de Python, `cairosvg`, `fonttools`, `pillow` e ImageMagick): `cd res/icdesk-brand && python3 gen.py && python3 export.py`. Os SVGs gerados ficam em `res/icdesk-brand/svg/`, que o `.gitignore` não versiona (`*.svg`); o `gen.py` os recria.
-- Tipografia do logo: Barlow Semi Condensed (Google Fonts).
-- O banner do topo (`res/logo-header.svg`) tem fundo preto próprio para ficar legível nos temas claro e escuro do GitHub.
+As cores e o logo do ICDESK foram inspirados na paleta oficial do IC TEAM.
 
 ## Compilar
 
