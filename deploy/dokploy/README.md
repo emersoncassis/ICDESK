@@ -21,9 +21,9 @@ Libere estas portas (entrada):
 1. Crie um projeto e adicione um serviço do tipo **Compose** (Raw ou apontando para este repositório, pasta `deploy/dokploy`).
 2. Cole o conteúdo de `docker-compose.yml`.
 3. Na aba **Environment**, defina `ICDESK_DOMAIN=desk.seudominio.com`.
-4. **Deploy**. Não configure domínio/Traefik: as portas são publicadas direto no host.
+4. **Deploy**. Não configure domínio/Traefik: o compose usa a rede do próprio servidor (`network_mode: host`, como no guia oficial), então as portas abrem direto na VPS.
 
-O volume `icdesk-data` guarda o par de chaves do servidor. **Não apague esse volume**: se a chave mudar, todos os apps já instalados deixam de conectar.
+O compose usa `-k _`: o servidor só aceita apps que tenham a chave dele (os apps gerados já a levam). O volume `icdesk-data` guarda o par de chaves do servidor. **Não apague esse volume**: se a chave mudar, todos os apps já instalados deixam de conectar.
 
 ## 4. Pegar a chave pública
 
@@ -33,7 +33,7 @@ No Dokploy, abra o terminal do contêiner `icdesk-hbbs` (ou use SSH na VPS) e ro
 cat /root/id_ed25519.pub
 ```
 
-Guarde esse texto. É a chave pública (pode ser compartilhada); a `id_ed25519` sem `.pub` é privada e nunca sai do servidor.
+Guarde esse texto (uma linha, termina com `=`). É a chave pública (pode ser compartilhada); a `id_ed25519` sem `.pub` é privada e nunca sai do servidor.
 
 ## 5. Gerar os apps apontando para o seu servidor
 

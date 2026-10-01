@@ -1,19 +1,19 @@
 # Servidor ICDESK (ID/rendezvous + relay) para o Dokploy.
-# Variável obrigatória no Dokploy (aba Environment): ICDESK_DOMAIN=desk.seudominio.com
+#
+# Antes de fazer o deploy, na aba Environment do Dokploy defina:
+#   ICDESK_DOMAIN=desk.seudominio.com
+#
+# Usa rede "host" (como no guia oficial do servidor), então não há "ports:" aqui:
+# libere no firewall da VPS  21115/tcp  21116/tcp  21116/udp  21117/tcp
 services:
   hbbs:
     container_name: icdesk-hbbs
     image: rustdesk/rustdesk-server:latest
-    command: hbbs
-    environment:
-      - RELAY=${ICDESK_DOMAIN}:21117
-      - ENCRYPTED_ONLY=1
-    ports:
-      - "21115:21115"
-      - "21116:21116"
-      - "21116:21116/udp"
+    # -r: endereço do relay que os apps recebem | -k _: só aceita apps com a chave do servidor
+    command: hbbs -r ${ICDESK_DOMAIN:?defina ICDESK_DOMAIN}:21117 -k _
     volumes:
       - icdesk-data:/root
+    network_mode: host
     depends_on:
       - hbbr
     restart: unless-stopped
@@ -21,11 +21,10 @@ services:
   hbbr:
     container_name: icdesk-hbbr
     image: rustdesk/rustdesk-server:latest
-    command: hbbr
-    ports:
-      - "21117:21117"
+    command: hbbr -k _
     volumes:
       - icdesk-data:/root
+    network_mode: host
     restart: unless-stopped
 
 volumes:
