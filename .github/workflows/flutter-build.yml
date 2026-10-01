@@ -48,6 +48,8 @@ env:
   VERSION: "1.5.0"
   NDK_VERSION: "r28c"
   #signing keys env variable checks
+  ICDESK_SERVER: "${{ secrets.ICDESK_SERVER }}"
+  ICDESK_KEY: "${{ secrets.ICDESK_KEY }}"
   ANDROID_SIGNING_KEY: "${{ secrets.ANDROID_SIGNING_KEY }}"
   MACOS_P12_BASE64: "${{ secrets.MACOS_P12_BASE64 }}"
   UPLOAD_ARTIFACT: "${{ inputs.upload-artifact }}"

@@ -33,6 +33,10 @@ A interface abre em **português do Brasil** por padrão. Para trocar, vá em Co
 
 As cores e o logo do ICDESK foram inspirados na paleta oficial do IC TEAM.
 
+## Servidor
+
+O servidor de conexão (VPS com Dokploy) está em [`deploy/dokploy/`](deploy/dokploy/README.md), com o passo a passo para colocar no ar e gerar os apps apontando para ele.
+
 ## Compilar
 
 - Tenha o ambiente de desenvolvimento Rust e C++ pronto.
