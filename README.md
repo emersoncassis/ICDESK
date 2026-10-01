@@ -35,7 +35,7 @@ As cores e o logo do ICDESK foram inspirados na paleta oficial do IC TEAM.
 
 ## Servidor
 
-O servidor de conexão (VPS com Dokploy) está em [`deploy/dokploy/`](deploy/dokploy/README.md), com o passo a passo para colocar no ar e gerar os apps apontando para ele.
+O servidor de conexão (VPS com Dokploy) está em [`deploy/dokploy/`](deploy/dokploy/README.md), com o passo a passo (edição Pro ou OSS) para colocar no ar e gerar os apps apontando para ele.
 
 ## Compilar
 

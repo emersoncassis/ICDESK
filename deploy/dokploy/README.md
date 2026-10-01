@@ -1,53 +1,63 @@
-# Servidor ICDESK no Dokploy
+# Servidor ICDESK na VPS (Dokploy)
 
-O servidor é o que faz os computadores se encontrarem pelo ID. Ele roda em dois contêineres (`hbbs` e `hbbr`) na sua VPS.
+O servidor é o que faz os computadores se encontrarem pelo ID. Há dois caminhos:
 
-## 1. DNS
-
-Crie um registro **A** `desk.seudominio.com` apontando para o IP da VPS. Se usar Cloudflare, deixe **somente DNS** (nuvem cinza): o tráfego não é HTTP e não passa pelo proxy.
-
-## 2. Firewall da VPS
-
-Libere estas portas (entrada):
-
-| Porta | Protocolo | Para quê |
+| | Arquivo | O que é |
 |---|---|---|
-| 21115 | TCP | teste de NAT |
-| 21116 | TCP **e UDP** | registro e conexão por ID |
-| 21117 | TCP | relay |
+| **Pro (escolhido)** | `docker-compose.pro.yml` | Console web, API, gerador de cliente personalizado (nome, logo e ícone próprios, já com o seu servidor). Exige licença paga. |
+| OSS (alternativa) | `docker-compose.oss.yml` | Só ID e relay, gratuito, sem console. |
 
-## 3. Dokploy
+## Servidor Pro
 
-1. Crie um projeto e adicione um serviço do tipo **Compose** (Raw ou apontando para este repositório, pasta `deploy/dokploy`).
-2. Cole o conteúdo de `docker-compose.yml`.
-3. Na aba **Environment**, defina `ICDESK_DOMAIN=desk.seudominio.com`.
-4. **Deploy**. Não configure domínio/Traefik: o compose usa a rede do próprio servidor (`network_mode: host`, como no guia oficial), então as portas abrem direto na VPS.
+### 1. Licença
 
-O compose usa `-k _`: o servidor só aceita apps que tenham a chave dele (os apps gerados já a levam). O volume `icdesk-data` guarda o par de chaves do servidor. **Não apague esse volume**: se a chave mudar, todos os apps já instalados deixam de conectar.
+A licença é comprada em [rustdesk.com/pricing.html](https://rustdesk.com/pricing.html) e ativada no console web (passo 5). Confira lá qual plano inclui o **gerador de cliente personalizado**.
 
-## 4. Pegar a chave pública
+### 2. DNS e firewall
 
-No Dokploy, abra o terminal do contêiner `icdesk-hbbs` (ou use SSH na VPS) e rode:
+- Registro **A** `desk.seudominio.com` apontando para o IP da VPS. Se usar Cloudflare, deixe **somente DNS** (nuvem cinza).
+- Portas de entrada: **TCP 21114-21119** e **UDP 21116**.
+- Até trocar a senha padrão (passo 5), restrinja a **21114** ao seu IP: o console sobe com usuário e senha conhecidos.
+
+### 3. Dokploy
+
+1. Projeto > serviço do tipo **Compose** > cole `docker-compose.pro.yml`.
+2. **Deploy**. Não configure domínio/Traefik: a rede é a do próprio servidor (`network_mode: host`, obrigatório no Pro).
+
+O volume `icdesk-data` guarda as chaves, o banco e a licença. **Não apague**, e faça backup dele.
+
+### 4. Chave pública
+
+No terminal do contêiner `icdesk-hbbs` (ou SSH na VPS):
 
 ```sh
 cat /root/id_ed25519.pub
 ```
 
-Guarde esse texto (uma linha, termina com `=`). É a chave pública (pode ser compartilhada); a `id_ed25519` sem `.pub` é privada e nunca sai do servidor.
+(no host: `sudo docker exec icdesk-hbbs cat /root/id_ed25519.pub`). Guarde esse texto: é a chave pública, pode ser compartilhada.
 
-## 5. Gerar os apps apontando para o seu servidor
+### 5. Console web
 
-No GitHub, em **Settings > Secrets and variables > Actions**, crie:
+1. Abra `http://IP-da-VPS:21114` e entre com o usuário e a senha padrão do guia oficial.
+2. **Troque a senha de admin imediatamente.**
+3. Ative a licença.
 
-| Secret | Valor |
-|---|---|
-| `ICDESK_SERVER` | `desk.seudominio.com` |
-| `ICDESK_KEY` | o conteúdo de `id_ed25519.pub` |
+### 6. Gerar o cliente ICDESK
 
-Depois vá em **Actions > Flutter Nightly Build > Run workflow**. Ao terminar, os instaladores ficam nos artefatos da execução. Os apps já saem com o servidor e a chave como padrão (o usuário ainda pode trocar em Configurações > Rede).
+No console, abra o gerador de **Custom Client** e informe:
 
-Assinatura: o Android precisa do secret `ANDROID_SIGNING_KEY` e o macOS de uma conta de desenvolvedor Apple; o Windows sai sem assinatura (o SmartScreen avisa na primeira execução).
+- nome do app: `ICDESK`
+- logo e ícone: `res/icon.png` (1024 px) e `res/logo-header.svg`/`flutter/assets/logo_light.png` deste repositório
+- servidor de ID: `desk.seudominio.com`, chave: a do passo 4, servidor de API: `http://desk.seudominio.com:21114`
+
+Plataformas atuais do gerador segundo o guia oficial: Windows x64, macOS (Arm64/X64), Linux e Android Arm64. Baixe os instaladores gerados e distribua.
+
+> Os clientes do gerador saem da base oficial, **não** deste repositório. O que está aqui (tema preto/dourado, português por padrão, textos) só vale para builds feitos a partir deste fork.
+
+## Servidor OSS (alternativa)
+
+`docker-compose.oss.yml`, com `ICDESK_DOMAIN=desk.seudominio.com` na aba Environment. Portas: TCP 21115, TCP/UDP 21116, TCP 21117. Chave: `cat /root/id_ed25519.pub` no contêiner `icdesk-hbbs`. Para gerar apps deste fork apontando para ele, crie no GitHub (Settings > Secrets and variables > Actions) os secrets `ICDESK_SERVER` e `ICDESK_KEY` e rode **Actions > Flutter Nightly Build**.
 
 ## Teste rápido
 
-Instale em dois computadores, anote o ID de um e conecte pelo outro. Se ficar em "Conectando..." para sempre, quase sempre é porta UDP 21116 ou TCP 21117 fechada no firewall.
+Instale em dois computadores, anote o ID de um e conecte pelo outro. Se ficar em "Conectando..." para sempre, quase sempre é a porta UDP 21116 ou TCP 21117 fechada.

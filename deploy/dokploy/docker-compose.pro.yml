@@ -1,0 +1,28 @@
+# Servidor ICDESK (edição Pro): ID/rendezvous + relay + console web e API.
+# Mesmo arquivo do guia oficial do servidor Pro; só mudei os nomes dos contêineres e o volume.
+#
+# Rede "host" é obrigatória (o guia oficial avisa que sem ela surgem problemas de licença).
+# Libere no firewall da VPS: 21114-21119/tcp e 21116/udp.
+services:
+  hbbs:
+    container_name: icdesk-hbbs
+    image: docker.io/rustdesk/rustdesk-server-pro:latest
+    command: hbbs
+    volumes:
+      - icdesk-data:/root
+    network_mode: "host"
+    depends_on:
+      - hbbr
+    restart: unless-stopped
+
+  hbbr:
+    container_name: icdesk-hbbr
+    image: docker.io/rustdesk/rustdesk-server-pro:latest
+    command: hbbr
+    volumes:
+      - icdesk-data:/root
+    network_mode: "host"
+    restart: unless-stopped
+
+volumes:
+  icdesk-data:
