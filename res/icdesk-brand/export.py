@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the ICDESK brand SVGs into every icon slot of the RustDesk fork."""
+"""Render the ICDESK brand SVGs into every icon slot of the app."""
 import io, os, re, shutil, sys
 import cairosvg
 from PIL import Image

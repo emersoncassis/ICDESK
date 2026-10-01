@@ -22,5 +22,5 @@ on run {daemon_file, agent_file, user, cur_pid, source_dir}
 
   set sh to "set -e;" & check_source & resolve_uid & unload_agent & unload_service & kill_others & copy_files & write_daemon_plist & write_agent_plist & load_service & load_agent
 
-  do shell script sh with prompt "RustDesk wants to update itself" with administrator privileges
+  do shell script sh with prompt "ICDESK wants to update itself" with administrator privileges
 end run
