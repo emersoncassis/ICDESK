@@ -182,8 +182,9 @@ pub fn translate(name: String) -> String {
 }
 
 pub fn translate_locale(name: String, locale: &str) -> String {
+    let saved_lang = hbb_common::config::LocalConfig::get_option("lang");
     let lang = resolve_lang(
-        &hbb_common::config::LocalConfig::get_option("lang"),
+        if saved_lang.is_empty() { "pt-br" } else { &saved_lang },
         locale,
         cjk_ui_unavailable(),
     );
