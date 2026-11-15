@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tenha o seu próprio acesso remoto · guia ICDESK</title>
+<meta name="description" content="Guia passo a passo, gratuito e open source, para criar o seu próprio sistema de acesso remoto a partir do ICDESK: fork, marca, design system, servidor na AWS, Hostinger ou IP fixo, build dos apps e site no GitHub Pages. Com skills para Claude Code, Codex e Antigravity.">
+<meta property="og:title" content="Tenha o seu próprio sistema de acesso remoto">
+<meta property="og:description" content="Fork, marca, servidor, apps e site. Gratuito e open source, com skills para Claude Code, Codex e Antigravity.">
+<meta property="og:image" content="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0D0D0D">
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+.hero.guide{padding:80px 0 72px}
+.hero.guide .wrap{grid-template-columns:1fr}
+.hero.guide h1{max-width:18ch}
+.hero.guide p.lead{max-width:60ch}
+.outcomes{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:40px}
+.outcome{padding:18px;border-radius:12px;background:var(--cx-surface);border:1px solid var(--line)}
+.outcome b{display:block;font:700 18px/1.2 var(--display);color:var(--cx-goldlight);margin-bottom:4px}
+.outcome span{font-size:15px;color:#C9C9C9}
+
+.need{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.need .card h3{margin-top:0;font-size:20px}
+.free{display:inline-block;margin-top:10px;font:700 12px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--cx-ok)}
+.paid{color:var(--muted)}
+
+.agents{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.agent h3{margin-top:0}
+.agent dl{margin-top:12px;display:grid;gap:8px;font-size:15px}
+.agent dt{color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.1em;font-family:var(--display)}
+.agent dd{color:var(--cx-text)}
+code,.code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.88em}
+code{background:var(--cx-surface-2);border:1px solid var(--line);border-radius:6px;padding:2px 6px;color:var(--cx-goldlight)}
+pre{background:#0a0a0a;border:1px solid var(--line);border-radius:10px;padding:16px 18px;overflow-x:auto;margin:14px 0;font-size:14px;line-height:1.55;color:#E5E5E5}
+pre code{background:none;border:0;padding:0;color:inherit}
+.prompt{margin-top:24px;padding:20px 22px;border-radius:12px;border:1px dashed var(--cx-gold);background:#14110b}
+.prompt span{display:block;font:700 12px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--cx-gold);margin-bottom:10px}
+.prompt p{font-size:17px;color:var(--cx-text)}
+
+.timeline{display:grid;gap:18px}
+.tstep{display:grid;grid-template-columns:72px 1fr;gap:22px;padding:28px;border-radius:16px;background:var(--cx-surface);border:1px solid var(--line)}
+.tnum{font:700 52px/1 var(--display);background:var(--cx-gold-gradient);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tstep>div{min-width:0}
+.tstep h3{font-size:26px;margin-bottom:6px}
+.tstep p,.tstep li{color:#CFCFCF;font-size:16px}
+.tstep ul,.tstep ol{margin:10px 0 0 20px;display:grid;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:7px 12px;border-radius:999px;background:var(--cx-surface-2);border:1px solid #3a3222;font:500 14px/1 var(--display);letter-spacing:.04em;color:var(--cx-goldlight)}
+.chip:hover{border-color:var(--cx-gold);text-decoration:none}
+.chip i{font-style:normal;color:var(--muted)}
+.ask{margin-top:14px;padding:14px 16px;border-left:3px solid var(--cx-gold);background:#14110b;border-radius:0 10px 10px 0}
+.ask b{font:700 13px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--cx-gold);display:block;margin-bottom:8px}
+
+.hosts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px}
+.host{padding:18px;border-radius:12px;background:var(--cx-surface-2);border:1px solid var(--line)}
+.host h4{font:700 19px/1.2 var(--display);margin-bottom:6px;color:var(--cx-text)}
+.host p{font-size:15px}
+table{display:block;overflow-x:auto;width:100%;border-collapse:collapse;margin-top:14px;font-size:15px}
+tbody,thead{width:100%}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font:700 13px/1 var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+td{color:#D6D6D6}
+
+.faq{display:grid;gap:12px}
+details{background:var(--cx-surface);border:1px solid var(--line);border-radius:12px;padding:18px 22px}
+summary{cursor:pointer;font:700 19px/1.3 var(--display);color:var(--cx-text);list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--cx-gold)}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:#CFCFCF;font-size:16px}
+
+@media (max-width:900px){
+  .outcomes,.need,.agents,.hosts{grid-template-columns:1fr}
+  .tstep{grid-template-columns:1fr;gap:6px;padding:22px}
+  .tnum{font-size:40px}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="assets/logo.svg" alt="">ICDESK</a>
+    <nav class="links">
+      <a href="#precisa">O que precisa</a>
+      <a href="#agentes">Skills</a>
+      <a href="#passos">Passo a passo</a>
+      <a href="./" style="color:var(--cx-goldlight)">Baixar o ICDESK</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<div class="hero guide">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Guia · gratuito e open source</span>
+      <h1>Tenha o seu próprio <span class="gold-text">sistema de acesso remoto.</span></h1>
+      <p class="lead">O ICDESK é aberto para quem quiser fazer a sua versão. Você faz um fork no GitHub, coloca o seu nome e as suas cores, sobe o seu servidor e publica os apps e o site. Sem licença e sem mensalidade de software. Um agente de IA faz o trabalho pesado com você, usando as skills prontas deste guia.</p>
+      <div class="outcomes">
+        <div class="outcome"><b>Sua marca</b><span>Nome, logo, cores e ícones em todos os apps</span></div>
+        <div class="outcome"><b>Seu servidor</b><span>Na AWS, na Hostinger ou numa máquina com IP fixo</span></div>
+        <div class="outcome"><b>Seus apps</b><span>Windows, macOS, Linux e Android já conectados ao seu servidor</span></div>
+        <div class="outcome"><b>Seu site</b><span>Página de download no GitHub Pages, como esta</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- O QUE PRECISA -->
+<section id="precisa">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Antes de começar</span>
+      <h2>O que você vai precisar.</h2>
+    </div>
+    <div class="need">
+      <div class="card"><h3>Conta no GitHub</h3><p>Para o fork, o build automático dos apps e o site.</p><span class="free">Grátis</span></div>
+      <div class="card"><h3>Um servidor</h3><p>Um VPS pequeno (1 vCPU, 1 GB de RAM) ou um computador seu ligado 24 h com IP fixo.</p><span class="free paid">Custo do provedor, ou grátis se for local</span></div>
+      <div class="card"><h3>Um agente de IA</h3><p>Claude Code, Codex ou Antigravity. Dá para seguir o guia à mão, mas o agente poupa horas.</p><span class="free paid">Conforme o plano do agente</span></div>
+      <div class="card"><h3>Um domínio</h3><p>Opcional, mas recomendado: <code>desk.suaempresa.com.br</code> facilita trocar de servidor no futuro.</p><span class="free paid">Opcional</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTES -->
+<section id="agentes">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Skills prontas</span>
+      <h2>Use o agente que você preferir.</h2>
+      <p>O repositório já vem com seis skills no padrão aberto <code>SKILL.md</code>, que funcionam nos três agentes. Cada skill sabe o que perguntar a você (nome, cores, onde hospedar…) e o que fazer depois.</p>
+    </div>
+    <div class="agents">
+      <div class="card agent">
+        <h3>Claude Code</h3>
+        <dl><dt>Pasta</dt><dd><code>.claude/skills/</code></dd><dt>Como chamar</dt><dd>Digite <code>/acesso-remoto-0-comece-aqui</code> ou peça em português</dd></dl>
+      </div>
+      <div class="card agent">
+        <h3>Codex</h3>
+        <dl><dt>Pasta</dt><dd><code>.agents/skills/</code></dd><dt>Como chamar</dt><dd>Digite <code>$acesso-remoto-0-comece-aqui</code>, use <code>/skills</code> ou peça em português</dd></dl>
+      </div>
+      <div class="card agent">
+        <h3>Antigravity</h3>
+        <dl><dt>Pasta</dt><dd><code>.agents/skills/</code></dd><dt>Como chamar</dt><dd>Peça em português; o agente escolhe a skill pela descrição. Ou cite o nome dela.</dd></dl>
+      </div>
+    </div>
+    <div class="prompt">
+      <span>Primeira mensagem para o agente</span>
+      <p>“Quero fazer a minha versão do acesso remoto a partir deste fork do ICDESK. Use a skill acesso-remoto-0-comece-aqui e me guie etapa por etapa, perguntando o que precisar.”</p>
+    </div>
+    <table>
+      <thead><tr><th>Skill</th><th>O que faz</th></tr></thead>
+      <tbody>
+        <tr><td><a href="https://github.com/emersoncassis/ICDESK/blob/master/.agents/skills/acesso-remoto-0-comece-aqui/SKILL.md"><code>acesso-remoto-0-comece-aqui</code></a></td><td>Confere em que ponto você está e conduz as etapas na ordem</td></tr>
+        <tr><td><a href="https://github.com/emersoncassis/ICDESK/blob/master/.agents/skills/acesso-remoto-1-marca/SKILL.md"><code>acesso-remoto-1-marca</code></a></td><td>Entrevista de marca, troca do nome em todos os textos e geração dos ícones</td></tr>
+        <tr><td><a href="https://github.com/emersoncassis/ICDESK/blob/master/.agents/skills/acesso-remoto-2-design-system/SKILL.md"><code>acesso-remoto-2-design-system</code></a></td><td>Tokens de cor e fonte aplicados no app e no site</td></tr>
+        <tr><td><a href="https://github.com/emersoncassis/ICDESK/blob/master/.agents/skills/acesso-remoto-3-servidor/SKILL.md"><code>acesso-remoto-3-servidor</code></a></td><td>Servidor no ar (AWS, Hostinger, outro VPS, Dokploy ou IP fixo) e chave pública</td></tr>
+        <tr><td><a href="https://github.com/emersoncassis/ICDESK/blob/master/.agents/skills/acesso-remoto-4-build/SKILL.md"><code>acesso-remoto-4-build</code></a></td><td>Segredos no GitHub, build dos instaladores e conferência</td></tr>
+        <tr><td><a href="https://github.com/emersoncassis/ICDESK/blob/master/.agents/skills/acesso-remoto-5-site/SKILL.md"><code>acesso-remoto-5-site</code></a></td><td>Landing page com downloads publicada no GitHub Pages</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PASSO A PASSO -->
+<section id="passos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Passo a passo</span>
+      <h2>Do fork ao site no ar.</h2>
+      <p>As etapas 1 e 2 (marca) e a 3 (servidor) podem andar em paralelo. A 4 precisa do servidor pronto, e a 5 precisa dos apps gerados.</p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="tstep"><div class="tnum">00</div><div>
+        <h3>Faça o fork</h3>
+        <ol>
+          <li>Entre no GitHub e abra <a href="https://github.com/emersoncassis/ICDESK">github.com/emersoncassis/ICDESK</a>.</li>
+          <li>Clique em <b>Fork</b>, escolha o nome do seu repositório e confirme.</li>
+          <li>No seu fork, abra a aba <b>Actions</b> e habilite os workflows.</li>
+          <li>Clone no seu computador e abra a pasta no seu agente:</li>
+        </ol>
+        <pre><code>git clone --recurse-submodules https://github.com/SEU-USUARIO/SEU-REPOSITORIO</code></pre>
+        <a class="chip" href="https://github.com/emersoncassis/ICDESK/fork"><i>GitHub</i> Fazer fork agora →</a>
+      </div></div>
+
+      <div class="tstep"><div class="tnum">01</div><div>
+        <h3>Crie a sua marca</h3>
+        <p>O agente entrevista você e registra tudo em <code>brand/BRAND.md</code>. Depois troca o nome em todos os textos que o usuário vê (52 idiomas, instaladores, Android, iOS) e gera os ícones de todas as plataformas a partir do seu logo.</p>
+        <div class="ask"><b>O que vão te perguntar</b>Nome do app e da empresa · para quem é · slogan · se já tem logo (ou se quer que ele crie um monograma) · cores · tema escuro ou claro · fonte · personalidade em 3 palavras</div>
+        <a class="chip" href="https://github.com/emersoncassis/ICDESK/blob/master/.agents/skills/acesso-remoto-1-marca/SKILL.md"><i>skill</i> acesso-remoto-1-marca</a>
+      </div></div>
+
+      <div class="tstep"><div class="tnum">02</div><div>
+        <h3>Monte o design system</h3>
+        <p>As decisões viram tokens em <code>brand/tokens.css</code>, a fonte da verdade da marca, espelhada no app (<code>flutter/lib/brand.dart</code>) e no template do site. O agente confere o contraste das cores e separa as cores de status (online, aviso, erro) da cor da marca.</p>
+        <div class="ask"><b>O que vão te perguntar</b>Tema escuro, claro ou os dois · cantos retos ou arredondados · layout compacto ou espaçoso · cor de “online”</div>
+        <a class="chip" href="https://github.com/emersoncassis/ICDESK/blob/master/.agents/skills/acesso-remoto-2-design-system/SKILL.md"><i>skill</i> acesso-remoto-2-design-system</a>
+      </div></div>
+
+      <div class="tstep"><div class="tnum">03</div><div>
+        <h3>Suba o seu servidor</h3>
+        <p>O servidor faz os aparelhos se encontrarem pelo ID e repassa a conexão quando o caminho direto não existe. Usamos o RustDesk Server OSS, gratuito, em Docker, com o arquivo pronto em <code>deploy/dokploy/docker-compose.oss.yml</code>.</p>
+        <div class="hosts">
+          <div class="host"><h4>AWS</h4><p>Lightsail com Ubuntu é o caminho mais simples: libere as portas na aba Networking e anexe um IP estático. No EC2, use o Security Group e um Elastic IP.</p></div>
+          <div class="host"><h4>Hostinger VPS</h4><p>Ubuntu (de preferência o modelo com Docker). No hPanel, em VPS &gt; Firewall, crie as regras de “Aceitar” para as portas abaixo e ative. Sem regra, tudo fica bloqueado.</p></div>
+          <div class="host"><h4>Máquina local com IP fixo</h4><p>Confirme que o IP é fixo e que não há CGNAT. No roteador, redirecione as portas para o IP interno da máquina, que precisa ficar ligada sempre.</p></div>
+          <div class="host"><h4>Dokploy ou outro VPS</h4><p>Qualquer VPS com Ubuntu e IP fixo serve. Se já usa Dokploy, crie um serviço Compose com o arquivo OSS do repositório.</p></div>
+        </div>
+        <table>
+          <thead><tr><th>Porta</th><th>Protocolo</th><th>Para quê</th></tr></thead>
+          <tbody>
+            <tr><td>21115</td><td>TCP</td><td>Teste de tipo de rede (NAT)</td></tr>
+            <tr><td>21116</td><td>TCP e UDP</td><td>Registro do ID e conexão direta</td></tr>
+            <tr><td>21117</td><td>TCP</td><td>Relay (quando não há conexão direta)</td></tr>
+          </tbody>
+        </table>
+        <pre><code>echo "ICDESK_DOMAIN=desk.suaempresa.com.br" &gt; .env
+docker compose -f compose.yml up -d
+docker exec icdesk-hbbs cat /root/id_ed25519.pub   # sua chave pública</code></pre>
+        <div class="ask"><b>O que vão te perguntar</b>Onde vai rodar (AWS, Hostinger, outro VPS, Dokploy ou local) · se tem domínio · se tem acesso SSH</div>
+        <a class="chip" href="https://github.com/emersoncassis/ICDESK/blob/master/.agents/skills/acesso-remoto-3-servidor/SKILL.md"><i>skill</i> acesso-remoto-3-servidor</a>
+      </div></div>
+
+      <div class="tstep"><div class="tnum">04</div><div>
+        <h3>Gere os seus apps</h3>
+        <p>Cadastre o endereço e a chave do servidor como segredos do repositório. O GitHub Actions compila os instaladores de graça (cerca de 1 h 30) e publica tudo na release <code>nightly</code>, com o seu servidor já configurado. Quem instala, conecta sem mexer em nada.</p>
+        <table>
+          <thead><tr><th>Segredo (Settings &gt; Secrets and variables &gt; Actions)</th><th>Valor</th></tr></thead>
+          <tbody>
+            <tr><td><code>ICDESK_SERVER</code></td><td>Endereço do servidor, ex.: <code>desk.suaempresa.com.br</code></td></tr>
+            <tr><td><code>ICDESK_KEY</code></td><td>Conteúdo da chave pública <code>id_ed25519.pub</code></td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:12px">Depois, em <b>Actions &gt; Flutter Nightly Build &gt; Run workflow</b>. A partir daí ele roda sozinho toda noite.</p>
+        <a class="chip" href="https://github.com/emersoncassis/ICDESK/blob/master/.agents/skills/acesso-remoto-4-build/SKILL.md"><i>skill</i> acesso-remoto-4-build</a>
+      </div></div>
+
+      <div class="tstep"><div class="tnum">05</div><div>
+        <h3>Publique o seu site</h3>
+        <p>O template desta página e da página de download está na pasta <code>site/</code> do repositório. O agente aplica a sua marca e os seus textos e publica no ramo <code>gh-pages</code>. Os botões de download encontram sozinhos os arquivos do seu repositório e se atualizam a cada build.</p>
+        <ol>
+          <li>Settings &gt; Pages &gt; Source: <b>Deploy from a branch</b> &gt; <code>gh-pages</code> / root.</li>
+          <li>O site abre em <code>https://SEU-USUARIO.github.io/SEU-REPOSITORIO/</code>.</li>
+          <li>Opcional: domínio próprio em Settings &gt; Pages &gt; Custom domain, com um registro CNAME no seu DNS.</li>
+        </ol>
+        <a class="chip" href="https://github.com/emersoncassis/ICDESK/blob/master/.agents/skills/acesso-remoto-5-site/SKILL.md"><i>skill</i> acesso-remoto-5-site</a>
+      </div></div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Dúvidas comuns</span>
+      <h2>Perguntas frequentes.</h2>
+    </div>
+    <div class="faq">
+      <details><summary>Quanto custa?</summary><p>O software é gratuito e open source: não há licença nem mensalidade. O único custo possível é o do servidor (o VPS que você contratar) e, se quiser, um domínio. Rodando numa máquina sua com IP fixo, o custo é só a energia e a internet.</p></details>
+      <details><summary>Preciso saber programar?</summary><p>Não. As skills foram escritas para conduzir quem não é programador: o agente pergunta, executa os comandos e explica cada passo. Você só precisa saber criar contas (GitHub e provedor) e tomar as decisões da sua marca.</p></details>
+      <details><summary>Posso usar só o servidor, sem criar uma marca?</summary><p>Pode. Faça a etapa 3 e, nos apps do ICDESK ou do RustDesk, coloque o seu servidor e a sua chave em Configurações &gt; Rede. Criar a sua marca serve para os apps já saírem configurados e com a sua cara.</p></details>
+      <details><summary>E a licença?</summary><p>O ICDESK é baseado no RustDesk, sob a licença AGPL-3.0. Você pode usar, modificar e distribuir, desde que mantenha o código-fonte aberto para quem recebe os seus apps (um fork público no GitHub resolve) e preserve os avisos de licença e o crédito ao projeto original.</p></details>
+      <details><summary>Por que não usar o servidor público do RustDesk?</summary><p>O servidor público é feito para demonstração e hoje exige login. Com o seu servidor, as conexões passam por uma máquina sua, você não depende de terceiros e os apps já saem configurados.</p></details>
+      <details><summary>Funciona no iPhone?</summary><p>Não há instalador público para iPhone e iPad: publicar na App Store exige conta de desenvolvedor da Apple. Windows, macOS, Linux e Android funcionam direto pelos instaladores gerados.</p></details>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="warn">
+      <svg viewBox="0 0 24 24"><path d="M12 3 2 20h20zM12 10v4M12 17h.01"/></svg>
+      <div>
+        <h3>Acesso remoto com responsabilidade</h3>
+        <p>Qualquer versão criada a partir deste guia deve ser usada apenas com autorização do dono de cada aparelho. Mantenha esse aviso no seu site e nos seus termos de uso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="./"><img src="assets/logo.svg" alt="">ICDESK</a>
+    <span><b style="color:var(--cx-gold)">IC TEAM</b> · gratuito e open source (AGPL-3.0), baseado no RustDesk</span>
+    <a href="https://github.com/emersoncassis/ICDESK">Código no GitHub</a>
+  </div>
+</footer>
+</body>
+</html>

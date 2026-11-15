@@ -15,137 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --cx-richblack:#0D0D0D;--cx-gold:#C5A059;--cx-goldlight:#E8CE94;--cx-techblue:#00F0FF;--cx-text:#F2F2F2;
-  --cx-ok:#22C55E;--cx-warn:#EAB308;
-  --cx-gold-gradient:linear-gradient(135deg,#EBD7A6,#C5A059,#8A6A32);
-  --cx-surface:#161616;--cx-surface-2:#1F1F1F;--cx-hover:#262626;--cx-on-gold:#0D0D0D;
-  --muted:#A3A3A3;--line:#2A2A2A;
-  --display:"Barlow Semi Condensed","Arial Narrow",sans-serif;
-  --body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
-  --max:1120px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--cx-richblack);color:var(--cx-text);font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased}
-a{color:var(--cx-goldlight);text-decoration:none}
-a:hover{text-decoration:underline}
-img{display:block;max-width:100%}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
-h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.1;letter-spacing:.01em}
-.eyebrow{font:700 13px/1 var(--display);letter-spacing:.18em;text-transform:uppercase;color:var(--cx-gold)}
-.gold-text{background:var(--cx-gold-gradient);-webkit-background-clip:text;background-clip:text;color:transparent}
-
-/* nav */
-header.nav{position:sticky;top:0;z-index:10;background:rgba(13,13,13,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-header.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
-.brand{display:flex;align-items:center;gap:10px;font:700 22px/1 var(--display);letter-spacing:.06em;color:var(--cx-text)}
-.brand img{width:34px;height:34px}
-.brand:hover{text-decoration:none}
-nav.links{display:flex;gap:28px;font:500 15px/1 var(--display);letter-spacing:.06em;text-transform:uppercase}
-nav.links a{color:var(--muted)}
-nav.links a:hover{color:var(--cx-goldlight);text-decoration:none}
-
-/* buttons */
-.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:10px;font:700 16px/1 var(--display);letter-spacing:.08em;text-transform:uppercase;border:1px solid transparent;cursor:pointer;transition:transform .15s,filter .15s,border-color .15s}
-.btn:hover{text-decoration:none;transform:translateY(-1px)}
-.btn-gold{background:var(--cx-gold-gradient);color:var(--cx-on-gold)}
-.btn-gold:hover{filter:brightness(1.08)}
-.btn-ghost{border-color:var(--cx-gold);color:var(--cx-goldlight)}
-.btn-ghost:hover{background:var(--cx-hover)}
-.btn svg{width:18px;height:18px}
-
-/* hero */
-.hero{position:relative;overflow:hidden;padding:96px 0 88px;border-bottom:1px solid var(--line)}
-.hero::before{content:"";position:absolute;inset:-40% -10% auto auto;width:720px;height:720px;background:radial-gradient(circle,rgba(197,160,89,.18),transparent 62%);pointer-events:none}
-.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;position:relative}
-.hero h1{font-size:clamp(44px,6vw,76px);margin:18px 0 20px}
-.hero p.lead{font-size:20px;color:#D4D4D4;max-width:34ch}
-.hero .cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
-.hero .os-hint{margin-top:14px;font-size:14px;color:var(--muted)}
-.hero-mark{position:relative;justify-self:center;width:min(380px,80vw)}
-.hero-mark img{width:100%;filter:drop-shadow(0 30px 60px rgba(0,0,0,.6))}
-.pulse{position:absolute;right:8%;top:12%;width:14px;height:14px;border-radius:50%;background:var(--cx-techblue);box-shadow:0 0 0 0 rgba(0,240,255,.6);animation:pulse 2.2s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(0,240,255,.55)}70%{box-shadow:0 0 0 22px rgba(0,240,255,0)}100%{box-shadow:0 0 0 0 rgba(0,240,255,0)}}
-@media (prefers-reduced-motion:reduce){.pulse{animation:none}}
-
-/* sections */
-section{padding:88px 0;border-bottom:1px solid var(--line)}
-.sec-head{max-width:680px;margin-bottom:48px}
-.sec-head h2{font-size:clamp(32px,4vw,46px);margin-top:12px}
-.sec-head p{color:#CFCFCF;margin-top:14px;font-size:18px}
-
-.grid{display:grid;gap:20px}
-.g3{grid-template-columns:repeat(3,1fr)}
-.g2{grid-template-columns:repeat(2,1fr)}
-.card{background:var(--cx-surface);border:1px solid var(--line);border-radius:14px;padding:28px}
-.card h3{font-size:22px;margin:16px 0 8px}
-.card p{color:#C9C9C9;font-size:16px}
-.ico{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:var(--cx-surface-2);border:1px solid #3a3222}
-.ico svg{width:22px;height:22px;stroke:var(--cx-gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-
-/* problem / solution */
-.ps{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.ps .card{display:flex;flex-direction:column;gap:6px}
-.ps .tag{font:700 12px/1 var(--display);letter-spacing:.16em;text-transform:uppercase}
-.ps .before .tag{color:var(--muted)}
-.ps .after{border-color:#4a3d24;background:linear-gradient(180deg,#1a1712,var(--cx-surface))}
-.ps .after .tag{color:var(--cx-gold)}
-.ps ul{list-style:none;margin-top:10px;display:grid;gap:12px}
-.ps li{display:grid;grid-template-columns:22px 1fr;gap:10px;color:#D0D0D0;font-size:16px}
-.ps li::before{content:"";width:8px;height:8px;margin-top:9px;border-radius:50%;background:#555}
-.ps .after li::before{background:var(--cx-gold)}
-
-/* steps */
-.steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.step{position:relative;padding:28px;border-radius:14px;border:1px solid var(--line);background:var(--cx-surface)}
-.step::before{counter-increment:s;content:"0" counter(s);font:700 44px/1 var(--display);display:block;margin-bottom:14px;background:var(--cx-gold-gradient);-webkit-background-clip:text;background-clip:text;color:transparent}
-.step h3{font-size:22px;margin-bottom:8px}
-.step p{color:#C9C9C9;font-size:16px}
-.id-demo{display:inline-block;margin-top:14px;padding:8px 14px;border-radius:8px;background:var(--cx-surface-2);border:1px solid var(--line);font:700 22px/1 var(--display);letter-spacing:.12em;color:var(--cx-goldlight)}
-
-/* downloads */
-.dl-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
-.os{background:var(--cx-surface);border:1px solid var(--line);border-radius:14px;padding:26px;transition:border-color .2s}
-.os.current{border-color:var(--cx-gold);box-shadow:0 0 0 1px rgba(197,160,89,.25) inset}
-.os-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-.os-head svg{width:30px;height:30px;fill:var(--cx-text)}
-.os-head h3{font-size:24px}
-.os-head .badge{margin-left:auto;font:700 11px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--cx-on-gold);background:var(--cx-gold);padding:6px 8px;border-radius:6px;display:none}
-.os.current .badge{display:inline-block}
-.files{display:grid;gap:10px}
-.file{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-radius:10px;background:var(--cx-surface-2);border:1px solid transparent;color:var(--cx-text)}
-.file:hover{border-color:var(--cx-gold);text-decoration:none;background:var(--cx-hover)}
-.file>span:first-child{flex:1}
-.file b{font:700 16px/1.2 var(--display);letter-spacing:.03em}
-.file small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
-.file .size{font-size:13px;color:var(--muted);white-space:nowrap}
-.file .arrow{color:var(--cx-gold);font-weight:700}
-.file.missing{opacity:.45;pointer-events:none}
-.dl-note{margin-top:22px;font-size:14px;color:var(--muted)}
-.dl-note .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--cx-ok);margin-right:6px;vertical-align:middle}
-
-/* warning */
-.warn{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;padding:26px;border-radius:14px;border:1px solid #4a3d24;background:#15120c}
-.warn svg{width:28px;height:28px;stroke:var(--cx-warn);fill:none;stroke-width:1.8}
-.warn h3{font-size:22px;margin-bottom:6px}
-.warn p{color:#D0D0D0;font-size:16px}
-
-footer{padding:48px 0;color:var(--muted);font-size:14px}
-footer .wrap{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:center}
-footer .brand{font-size:18px}
-
-@media (max-width:900px){
-  .hero .wrap{grid-template-columns:1fr;gap:40px}
-  .hero-mark{width:min(260px,70vw);order:-1;justify-self:start}
-  .g3,.steps{grid-template-columns:1fr}
-  .g2,.ps,.dl-grid{grid-template-columns:1fr}
-  nav.links{display:none}
-  section{padding:64px 0}
-  .hero{padding:56px 0 64px}
-}
-</style>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
 
@@ -157,6 +27,7 @@ footer .brand{font-size:18px}
       <a href="#resolve">O que resolve</a>
       <a href="#como-funciona">Como funciona</a>
       <a href="#download">Download</a>
+      <a href="seu-servidor.html" style="color:var(--cx-goldlight)">Faça o seu</a>
     </nav>
   </div>
 </header>
@@ -167,9 +38,9 @@ footer .brand{font-size:18px}
 <div class="hero">
   <div class="wrap">
     <div>
-      <span class="eyebrow">Acesso remoto · IC TEAM</span>
+      <span class="eyebrow">Acesso remoto · gratuito e open source</span>
       <h1>Suporte à distância,<br><span class="gold-text">sem sair do lugar.</span></h1>
-      <p class="lead">O ICDESK permite ver, usar e consertar um computador ou celular pela internet, com conexão pelo servidor próprio do IC TEAM.</p>
+      <p class="lead">O ICDESK permite ver, usar e consertar um computador ou celular pela internet, com conexão pelo servidor próprio do IC TEAM. Gratuito e de código aberto.</p>
       <div class="cta">
         <a class="btn btn-gold" id="hero-dl" href="#download">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0-5-5m5 5 5-5M4 21h16"/></svg>
@@ -177,7 +48,7 @@ footer .brand{font-size:18px}
         </a>
         <a class="btn btn-ghost" href="#como-funciona">Como funciona</a>
       </div>
-      <p class="os-hint" id="hero-hint">Windows · macOS · Linux · Android</p>
+      <p class="os-hint" id="hero-hint">Windows · macOS · Linux · Android · sem mensalidade</p>
     </div>
     <div class="hero-mark">
       <img src="assets/logo.svg" alt="Logo do ICDESK">
@@ -220,6 +91,11 @@ footer .brand{font-size:18px}
         <div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg></div>
         <h3>Servidor próprio</h3>
         <p>As conexões passam pelo servidor do IC TEAM, não por um serviço público compartilhado com o mundo todo.</p>
+      </div>
+      <div class="card">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M8 9 4 12l4 3M16 9l4 3-4 3M14 5l-4 14"/></svg></div>
+        <h3>Gratuito e open source</h3>
+        <p>Sem licença, sem mensalidade e sem limite de aparelhos. Todo o código está aberto no GitHub para quem quiser conferir ou adaptar.</p>
       </div>
       <div class="card">
         <div class="ico"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div>
@@ -368,6 +244,23 @@ footer .brand{font-size:18px}
   </div>
 </section>
 
+<!-- FAÇA O SEU -->
+<section id="faca-o-seu">
+  <div class="wrap">
+    <div class="diy">
+      <div>
+        <span class="eyebrow">Faça o seu</span>
+        <h2>Tenha o seu próprio sistema de acesso remoto.</h2>
+        <p>O ICDESK é aberto: qualquer pessoa ou empresa pode fazer um fork, colocar a própria marca, subir o próprio servidor na AWS, na Hostinger ou numa máquina com IP fixo, e publicar os apps e o site, tudo de graça. Preparamos um guia passo a passo e skills prontas para o Claude Code, o Codex e o Antigravity fazerem o trabalho com você.</p>
+      </div>
+      <div class="diy-cta">
+        <a class="btn btn-gold" href="seu-servidor.html">Ver o guia passo a passo</a>
+        <a class="btn btn-ghost" href="https://github.com/emersoncassis/ICDESK/fork">Fazer fork no GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- AVISO -->
 <section>
   <div class="wrap">
@@ -386,14 +279,16 @@ footer .brand{font-size:18px}
 <footer>
   <div class="wrap">
     <a class="brand" href="#top"><img src="assets/logo.svg" alt="">ICDESK</a>
-    <span>Um produto <b style="color:var(--cx-gold)">IC TEAM</b> · baseado no projeto de código aberto RustDesk (AGPL-3.0)</span>
+    <span><b style="color:var(--cx-gold)">IC TEAM</b> · gratuito e open source (AGPL-3.0), baseado no RustDesk</span>
     <a href="https://github.com/emersoncassis/ICDESK">Código no GitHub</a>
   </div>
 </footer>
 
 <script>
 (function(){
-  var REPO="emersoncassis/ICDESK", TAG="nightly";
+  var FALLBACK_REPO="emersoncassis/ICDESK", TAG="nightly";
+  var REPO=FALLBACK_REPO, h=location.hostname, seg=location.pathname.split("/")[1];
+  if(/\.github\.io$/.test(h) && seg) REPO=h.split(".")[0]+"/"+seg;
   var RELEASE_PAGE="https://github.com/"+REPO+"/releases/tag/"+TAG;
   var files=[].slice.call(document.querySelectorAll(".file"));
   files.forEach(function(a){a.href=RELEASE_PAGE;});
