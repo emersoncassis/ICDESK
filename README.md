@@ -33,6 +33,12 @@ A interface abre em **português do Brasil** por padrão. Para trocar, vá em Co
 
 As cores e o logo do ICDESK foram inspirados na paleta oficial do IC TEAM.
 
+## Site e "faça o seu"
+
+- Site com downloads: https://emersoncassis.github.io/ICDESK/ (fonte em [`site/`](site/), publicado no ramo `gh-pages`).
+- O ICDESK é gratuito e open source. Para criar a sua própria versão (marca, servidor, apps e site), siga o guia https://emersoncassis.github.io/ICDESK/seu-servidor.html
+- Skills prontas para agentes de IA: [`.claude/skills/`](.claude/skills/) (Claude Code) e [`.agents/skills/`](.agents/skills/) (Codex e Antigravity). Comece por `acesso-remoto-0-comece-aqui`.
+
 ## Servidor
 
 O servidor de conexão (VPS com Dokploy) está em [`deploy/dokploy/`](deploy/dokploy/README.md), com o passo a passo (edição Pro ou OSS) para colocar no ar e gerar os apps apontando para ele.

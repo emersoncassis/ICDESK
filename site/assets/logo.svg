@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+<defs>
+  <!-- ICDESK palette: gradient #EBD7A6 -> #C5A059 -> #8A6A32, gold light #E8CE94, rich black #0D0D0D -->
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#EBD7A6"/><stop offset=".3" stop-color="#C5A059"/>
+    <stop offset=".5" stop-color="#E8CE94"/><stop offset=".78" stop-color="#8A6A32"/>
+    <stop offset="1" stop-color="#C5A059"/>
+  </linearGradient>
+  <linearGradient id="goldV" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#EBD7A6"/><stop offset=".5" stop-color="#C5A059"/>
+    <stop offset="1" stop-color="#8A6A32"/>
+  </linearGradient>
+  <linearGradient id="goldDark" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#8A6A32"/><stop offset="1" stop-color="#4F3C1B"/>
+  </linearGradient>
+  <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#D9D9D9"/><stop offset=".3" stop-color="#7D7D7D"/>
+    <stop offset=".55" stop-color="#C4C4C4"/><stop offset=".8" stop-color="#666666"/>
+    <stop offset="1" stop-color="#B5B5B5"/>
+  </linearGradient>
+  <radialGradient id="face" cx=".5" cy=".42" r=".6">
+    <stop offset="0" stop-color="#1F1F1F"/><stop offset="1" stop-color="#0D0D0D"/>
+  </radialGradient>
+</defs><circle cx="512" cy="512" r="504" fill="url(#goldDark)"/><path fill="url(#gold)" fill-rule="evenodd" d="M18,512a494,494 0 1,0 988,0a494,494 0 1,0 -988,0ZM132,512a380,380 0 1,1 760,0a380,380 0 1,1 -760,0Z"/><circle cx="512" cy="512" r="380" fill="url(#face)"/><path fill="url(#goldV)" stroke="#5C4620" stroke-width="4" d="M303.8,347.0L418.1,347.0L456.2,385.1L456.2,413.0L407.9,413.0L407.9,611.0L456.2,611.0L456.2,638.9L418.1,677.0L303.8,677.0L265.8,638.9L265.8,611.0L314.0,611.0L314.0,413.0L265.8,413.0L265.8,385.1ZM570.4,347.0L720.2,347.0L758.2,385.1L758.2,440.9L669.4,440.9L669.4,440.9L618.6,440.9L585.6,473.9L585.6,550.1L618.6,583.1L669.4,583.1L669.4,583.1L758.2,583.1L758.2,638.9L720.2,677.0L570.4,677.0L491.7,598.3L491.7,425.7Z"/></svg>
